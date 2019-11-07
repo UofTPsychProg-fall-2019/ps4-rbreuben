@@ -1,0 +1,46 @@
+## experiment description ##
+
+Elucidating the role of estrogen in the brain is critical to understanding one of the key neuromodulatory mechanisms that influence memory. Estrogen improves both verbal (Sherwin, 1988) and working memory performance(Hampson, 2008), enhances hippocampal volume (Albert et al., 2017), and improves prefrontal cortex function (Joffe et al, 2006). Estrogen deprivation is associated with short-term working and verbal memory declines (Phillips & Sherwin, 1992; Grigorova et al., 2006) and administration of exogenous 17β-estradiol (E2) improves verbal memory performance (Wroolie et al., 2011). In animal models, loss of estrogens leads to synaptic reduction in the hippocampus, while estradiol replacement prevents this decrease (Gould et al., 1990). Thus, E2 plays an important role in the brain structures underlying memory and moderates behavioral performance. The current research explores this relationship through an associative face-name task, which has been shown to activate both the hippocampus and prefrontal cortex in successful trials (Sperling et al., 2003). Participants will view face-name stimuli that involve a color photograph of an unfamiliar face on a black background with a fictional first name printed in white underneath each face for 1.75s each. For each pair, participants will be asked to make a subjective decision whether each name is a good fit or bad fit for the face. In between the presentations of the face will be a fixation cross of a random interval between .25-10s. Afterwards, participants will be presented with the same face images on a black background with two names printed in white underneath the face—the correct named that was paired during encoding, and an incorrect name that was paired with a different face during encoding. Participants will be asked to indicate if the correct name is on the left or right of the face, by pressing ‘1’ if it is on the left, and ‘2’ if it is on the right. I hypothesize that performance on this task will be moderated by estrogen levels, and participants with higher estrogen levels will have significantly more correct responses than those with lower estrogen levels.
+
+## pseudocode ##
+
+en_facenames = read_dir(‘enfacenames/*.png’) #read in stimuli
+fixation = read_dir(‘fixation.png’)
+rc_facenames = read_dir(‘rcfacenames/*.png’) 
+
+subject = input() #input subject ID
+
+shuffle(en_facenames) #randomize order of face-name presentations
+
+duration = 1750 
+
+en_trials = len(en_facenames) 
+
+
+for trial in 0:en_trials #structure of encoding trials 
+	if is_odd(subject) # counterbalance response mappings
+		response_keys = [’1’, ‘2’]
+	else
+		response_keys = [‘2’, ‘1’]
+	response = listen_to_keyboard(response_keys)
+	display_image(en_facenames[trial], duration)
+	display_fixation(fixation, random.randint(250, 10000))
+	save(trial, response)
+
+shuffle(rc_facenames)
+
+rc_trials = len(rc_facenames)
+
+for trial in 0:rc_trials #structure of recall trials 
+	response_keys = [‘1’, ‘2’]
+	response = listen_to_keyboard(response_keys)
+	display_image(rc_facenames[trial])
+	save(trial, response)
+
+
+
+
+
+
+
+
